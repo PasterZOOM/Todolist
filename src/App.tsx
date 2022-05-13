@@ -100,8 +100,8 @@ function App() {
             <Container fixed>
                 <Grid container style={{padding: '20px'}}>
                     <AddItemForms addItem={addTodolist}
-                                  label={'Enter todolist name'}
-                                  helperText={'Invalid todolist name'}/>
+                                  itemTitle={'todolist'}
+                                  />
                 </Grid>
                 <Grid container spacing={3}>
 
@@ -112,7 +112,7 @@ function App() {
                                 filteredTasks = tasksObj[tl.id]
                         return (
                             <Grid item>
-                                <Paper style={{padding:'10px'}}>
+                                <Paper elevation={3} style={{padding:'10px'}}>
                                     <Todolist
                                         key={tl.id}
                                         id={tl.id}

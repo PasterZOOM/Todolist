@@ -35,5 +35,7 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
             onChange={onChangeTitleHandler}
             size={'small'}
         />
-        : <span onDoubleClick={activeEditMode}>{props.title}</span>
+
+        : <span onDoubleClick={activeEditMode}>{props.title}
+    </span>
 }

@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {FilterType} from './App';
 import {AddItemForms} from './AddItemForms';
 import {EditableSpan} from './EditableSpan';
-import {Button, Checkbox, IconButton} from '@mui/material';
+import {Button, Checkbox, IconButton, Tooltip} from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -52,13 +52,15 @@ export function Todolist(props: PropsType) {
     return <div>
         <h3>
             <EditableSpan title={props.title} onChange={onChangeTodolistTitleHandler}/>
-            <IconButton onClick={removeTodolist} aria-label="delete" size="small">
-                <DeleteIcon fontSize="inherit"/>
-            </IconButton>
+            <Tooltip title="Delete todolist">
+                <IconButton onClick={removeTodolist} aria-label="delete" size="small">
+                    <DeleteIcon fontSize="inherit"/>
+                </IconButton>
+            </Tooltip>
         </h3>
         <AddItemForms addItem={addTask}
-                      label={'Enter task name'}
-                      helperText={'Invalid task name'}/>
+                      itemTitle={'task'}
+                      />
         <div>
             {props.tasks.map(task => {
 
@@ -83,9 +85,11 @@ export function Todolist(props: PropsType) {
                             checkedIcon={<BookmarkIcon/>}
                         />
                         <EditableSpan title={task.title} onChange={onChangeTitleHandler}/>
-                        <IconButton onClick={onClickXButtonHandler} aria-label="delete" size="small">
-                            <ClearIcon fontSize="inherit"/>
-                        </IconButton>
+                        <Tooltip title="Delete task">
+                            <IconButton onClick={onClickXButtonHandler} aria-label="delete" size="small">
+                                <ClearIcon fontSize="inherit"/>
+                            </IconButton>
+                        </Tooltip>
                     </div>)
             })}
         </div>
