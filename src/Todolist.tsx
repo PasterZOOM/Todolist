@@ -60,7 +60,7 @@ export function Todolist(props: PropsType) {
         </h3>
         <AddItemForms addItem={addTask}
                       itemTitle={'task'}
-                      />
+        />
         <div>
             {props.tasks.map(task => {
 
