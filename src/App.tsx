@@ -54,22 +54,23 @@ function App() {
         setTodolists([newTodolist, ...todolists])
         setTasksObj({...tasksObj, [IDForNewTodolist]: []})
     }
+    const changeTodolistTitle = (todolistID: string, newTitle: string) => {
+        setTodolists(todolists.map(todolist => todolist.id === todolistID ? {...todolist, title: newTitle} : todolist))
+    }
+    const changeTodolistFilter = (todolistID: string, value: FilterType) => {
+        setTodolists(todolists.map(tl => tl.id === todolistID ? {...tl, filter: value} : tl))
+    }
+
     const addTask = (todolistID: string, title: string) => {
         let task = {id: v1(), title: title, isDone: false}
         setTasksObj({...tasksObj, [todolistID]: [task, ...tasksObj[todolistID]]})
     }
-    const deleteTask = (todolistID: string, newId: string) => {
+    const removeTask = (todolistID: string, newId: string) => {
         setTasksObj({
             ...tasksObj, [todolistID]: tasksObj[todolistID].filter(
                 t => t.id !== newId
             )
         })
-    }
-    const filterTasks = (todolistID: string, value: FilterType) => {
-        setTodolists(todolists.map(tl => tl.id === todolistID ? {...tl, filter: value} : tl))
-    }
-    const onChangeTodolistTitle = (todolistID: string, newTitle: string) => {
-        setTodolists(todolists.map(todolist => todolist.id === todolistID ? {...todolist, title: newTitle} : todolist))
     }
     const changeStatus = (todolistID: string, taskId: string, isDone: boolean) => {
         setTasksObj({
@@ -120,12 +121,12 @@ function App() {
                                         filter={tl.filter}
                                         tasks={filteredTasks}
                                         addTask={addTask}
-                                        deleteTask={deleteTask}
-                                        filterTasks={filterTasks}
+                                        deleteTask={removeTask}
+                                        filterTasks={changeTodolistFilter}
                                         changeTaskStatus={changeStatus}
                                         removeTodolist={removeTodolist}
                                         changeTaskTitle={changeTaskTitle}
-                                        onChangeTodolistTitle={onChangeTodolistTitle}
+                                        onChangeTodolistTitle={changeTodolistTitle}
                                     />
                                 </Paper>
                             </Grid>
