@@ -27,18 +27,6 @@ function App() {
         {id: todolistID2, title: 'What to byu', filter: 'All'}
     ])
 
-    const [tasksObj, setTasksObj] = useState<TasksStateType>({
-        [todolistID1]: [
-            {id: v1(), title: 'HTML&CSS', isDone: true},
-            {id: v1(), title: 'JS', isDone: true},
-            {id: v1(), title: 'ReactJS', isDone: false},
-            {id: v1(), title: 'ReactJS', isDone: false}],
-        [todolistID2]: [
-            {id: v1(), title: 'Book', isDone: true},
-            {id: v1(), title: 'Milk', isDone: true},
-            {id: v1(), title: 'Sugar', isDone: false}]
-    })
-
     const removeTodolist = (todolistID: string) => {
         setTodolists(todolists.filter(t => t.id !== todolistID))
         delete tasksObj[todolistID]
@@ -60,6 +48,18 @@ function App() {
     const changeTodolistFilter = (todolistID: string, value: FilterType) => {
         setTodolists(todolists.map(tl => tl.id === todolistID ? {...tl, filter: value} : tl))
     }
+
+    const [tasksObj, setTasksObj] = useState<TasksStateType>({
+        [todolistID1]: [
+            {id: v1(), title: 'HTML&CSS', isDone: true},
+            {id: v1(), title: 'JS', isDone: true},
+            {id: v1(), title: 'ReactJS', isDone: false},
+            {id: v1(), title: 'ReactJS', isDone: false}],
+        [todolistID2]: [
+            {id: v1(), title: 'Book', isDone: true},
+            {id: v1(), title: 'Milk', isDone: true},
+            {id: v1(), title: 'Sugar', isDone: false}]
+    })
 
     const addTask = (todolistID: string, title: string) => {
         let task = {id: v1(), title: title, isDone: false}

@@ -8,7 +8,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
-
 export type TaskType = {
     id: string
     title: string
