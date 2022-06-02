@@ -36,7 +36,6 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
         case 'ADD_TODOLIST':
             return {...state, [action.todolistId]: []}
         case 'REMOVE_TODOLIST':
-            // eslint-disable-next-line no-empty-pattern
             let {[action.todolistId]: [], ...rest} = {...state}
             return rest
         default:
