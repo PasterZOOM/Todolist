@@ -93,7 +93,6 @@ export function Todolist(props: PropsType) {
             })}
         </div>
         <div>
-
             <Button variant={props.filter === 'All' ? 'outlined' : 'text'}
                     onClick={onClickAllButtonHandler}>All
             </Button>
