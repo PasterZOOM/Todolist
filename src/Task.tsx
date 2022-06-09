@@ -5,42 +5,43 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {EditableSpan} from './EditableSpan';
 import ClearIcon from '@mui/icons-material/Clear';
 import {TaskType} from './Todolist';
+import {useDispatch} from 'react-redux';
+import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './state/tasksReducer';
 
 type TaskPropsType = {
     task: TaskType
     todolistId: string
-    removeTask: (todolistID: string, newId: string) => void
-    changeTaskTitle: (todolistID: string, taskId: string, newTitle: string) => void
-    changeTaskStatus: (todolistID: string, taskId: string, isDone: boolean) => void
 }
 
 export const Task: React.FC<TaskPropsType> = React.memo((
-    {task, todolistId, removeTask, changeTaskTitle, changeTaskStatus}
+    {task, todolistId}
 ) => {
 
-    const onClickXButtonHandler = useCallback(() => {
-        removeTask(todolistId, task.id)
-    }, [removeTask, todolistId, task.id])
-    const onChangeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        changeTaskStatus(todolistId, task.id, e.currentTarget.checked)
-    }, [changeTaskStatus, todolistId, task.id])
-    const onChangeTitleHandler = useCallback((newTitle: string) => {
-        changeTaskTitle(todolistId, task.id, newTitle)
-    }, [changeTaskTitle, todolistId, task.id])
+    let dispatch = useDispatch()
+
+    const removeTask = useCallback(() => {
+        dispatch(removeTaskAC(todolistId, task.id))
+    }, [dispatch, todolistId, task.id])
+    const changeTaskStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(changeTaskStatusAC(todolistId, task.id, e.currentTarget.checked))
+    }, [dispatch, todolistId, task.id])
+    const changeTaskTitle = useCallback((newTitle: string) => {
+        dispatch(changeTaskTitleAC(todolistId, task.id, newTitle))
+    }, [dispatch, todolistId, task.id])
 
     return (
         <div key={task.id}
              className={task.isDone ? 'is-done' : ''}>
             <Checkbox
-                onChange={onChangeStatusHandler}
+                onChange={changeTaskStatus}
                 checked={task.isDone}
                 size="small"
                 icon={<BookmarkBorderIcon/>}
                 checkedIcon={<BookmarkIcon/>}
             />
-            <EditableSpan title={task.title} onChange={onChangeTitleHandler}/>
+            <EditableSpan title={task.title} onChange={changeTaskTitle}/>
             <Tooltip title="Remove task">
-                <IconButton onClick={onClickXButtonHandler} aria-label="delete" size="small">
+                <IconButton onClick={removeTask} aria-label="delete" size="small">
                     <ClearIcon fontSize="inherit"/>
                 </IconButton>
             </Tooltip>
