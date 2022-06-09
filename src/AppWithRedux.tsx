@@ -1,14 +1,14 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {TaskType, Todolist} from './Todolist';
+import {TaskType} from './Todolist';
 import {AddItemForms} from './AddItemForms';
 import AppBar from '@mui/material/AppBar';
-import {Button, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';
+import {Button, Grid, IconButton, Toolbar, Typography} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@material-ui/core/Container';
 import {addTodolistAC} from './state/todolistsReducer';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from './state/store';
+import {useDispatch} from 'react-redux';
+import {Todolists} from './Todolists';
 
 export type FilterType = 'All' | 'Active' | 'Completed'
 export type TodolistType = {
@@ -24,7 +24,6 @@ function AppWithRedux() {
 
     console.log('AppWithRedux')
 
-    const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
     const dispatch = useDispatch()
 
     const addTodolist = useCallback((titleForNewTodolist: string) => {
@@ -50,21 +49,11 @@ function AppWithRedux() {
                                   itemTitle={'todolist'}
                     />
                 </Grid>
-                <Grid container spacing={3}>
-                    {todolists.map(tl =>
-                        <Grid item key={tl.id}>
-                            <Paper variant={'outlined'}
-                                   style={{padding: '10px'}}
-                                   square>
-                                <Todolist todolist={tl}
-                                />
-                            </Paper>
-                        </Grid>)
-                    }
-                </Grid>
+                <Todolists/>
             </Container>
         </div>
     )
 }
 
 export default AppWithRedux
+
