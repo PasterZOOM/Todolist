@@ -1,41 +1,42 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
 import {TextField} from '@mui/material';
 
 export type EditableSpanPropsType = {
     title: string
     onChange: (newTitle: string) => void
 }
-export const EditableSpan = (props: EditableSpanPropsType) => {
+export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({title, onChange}) => {
 
-    let [title, setTitle] = useState<string>('')
+    console.log('EditableSpan')
+
+    let [newTitle, setTitle] = useState<string>('')
     let [editMode, setEditMode] = useState<boolean>(false)
 
     const activeEditMode = () => {
         setEditMode(true)
-        setTitle(props.title)
+        setTitle(title)
     }
-    const activeViewMode = () => {
+    const activeViewMode = useCallback(() => {
         setEditMode(false)
-        props.onChange(title)
-    }
+        onChange(newTitle)
+    },[newTitle, onChange])
     const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
-    const onKeyPressEnter = (e: KeyboardEvent<HTMLInputElement>) =>
-        e.key === 'Enter' && activeViewMode()
-
+    const onKeyPressEnter = useCallback((e: KeyboardEvent<HTMLInputElement>) =>{
+        e.key === 'Enter' && activeViewMode()}, [activeViewMode])
 
     return editMode ?
         <TextField
             variant="standard"
             onBlur={activeViewMode}
             autoFocus
-            value={title}
-            onKeyPress={onKeyPressEnter}
+            value={newTitle}
+            onKeyDown={onKeyPressEnter}
             onChange={onChangeTitleHandler}
             size={'small'}
         />
 
-        : <span onDoubleClick={activeEditMode}>{props.title}
+        : <span onDoubleClick={activeEditMode}>{title}
     </span>
-}
+})

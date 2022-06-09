@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {AddItemForms} from './AddItemForms';
@@ -23,35 +23,36 @@ export type TasksStateType = {
 
 function AppWithRedux() {
 
+    console.log('AppWithRedux')
+
     const todolists = useSelector<AppRootStateType, Array<TodolistType>>(state => state.todolists)
-    const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
     const dispatch = useDispatch()
 
-    const addTask = (todolistID: string, title: string) => {
+    const addTask = useCallback((todolistID: string, title: string) => {
         dispatch(addTaskAC(todolistID, title))
-    }
-    const removeTask = (todolistID: string, newId: string) => {
+    }, [dispatch])
+    const removeTask = useCallback((todolistID: string, newId: string) => {
         dispatch(removeTaskAC(todolistID, newId))
-    }
-    const changeStatus = (todolistID: string, taskId: string, isDone: boolean) => {
+    }, [dispatch])
+    const changeStatus = useCallback((todolistID: string, taskId: string, isDone: boolean) => {
         dispatch(changeTaskStatusAC(todolistID, taskId, isDone))
-    }
-    const changeTaskTitle = (todolistID: string, taskId: string, newTitle: string) => {
+    }, [dispatch])
+    const changeTaskTitle = useCallback((todolistID: string, taskId: string, newTitle: string) => {
         dispatch(changeTaskTitleAC(todolistID, taskId, newTitle))
-    }
+    }, [dispatch])
 
-    const removeTodolist = (todolistID: string) => {
+    const removeTodolist = useCallback((todolistID: string) => {
         dispatch(removeTodoListAC(todolistID))
-    }
-    const addTodolist = (titleForNewTodolist: string) => {
+    }, [dispatch])
+    const addTodolist = useCallback((titleForNewTodolist: string) => {
         dispatch(addTodolistAC(titleForNewTodolist))
-    }
-    const changeTodolistTitle = (todolistID: string, newTitle: string) => {
+    }, [dispatch])
+    const changeTodolistTitle = useCallback((todolistID: string, newTitle: string) => {
         dispatch(changeTodolistTitleAC(todolistID, newTitle))
-    }
-    const changeTodolistFilter = (todolistID: string, value: FilterType) => {
+    }, [dispatch])
+    const changeTodolistFilter = useCallback((todolistID: string, value: FilterType) => {
         dispatch(changeTodolistFilterAC(todolistID, value))
-    }
+    }, [dispatch])
 
     return (
         <div className="App">
@@ -73,12 +74,7 @@ function AppWithRedux() {
                     />
                 </Grid>
                 <Grid container spacing={3}>
-
                     {todolists.map(tl => {
-                        let filteredTasks
-                        tl.filter === 'Active' ? filteredTasks = tasks[tl.id].filter(t => !t.isDone) :
-                            tl.filter === 'Completed' ? filteredTasks = tasks[tl.id].filter(t => t.isDone) :
-                                filteredTasks = tasks[tl.id]
                         return (
                             <Grid item key={tl.id}>
                                 <Paper elevation={3} style={{padding: '10px'}}>
@@ -86,9 +82,8 @@ function AppWithRedux() {
                                         id={tl.id}
                                         title={tl.title}
                                         filter={tl.filter}
-                                        tasks={filteredTasks}
                                         addTask={addTask}
-                                        deleteTask={removeTask}
+                                        removeTask={removeTask}
                                         filterTasks={changeTodolistFilter}
                                         changeTaskStatus={changeStatus}
                                         removeTodolist={removeTodolist}
@@ -97,13 +92,12 @@ function AppWithRedux() {
                                     />
                                 </Paper>
                             </Grid>
-
                         )
                     })}
                 </Grid>
             </Container>
         </div>
-    );
+    )
 }
 
-export default AppWithRedux;
+export default AppWithRedux
