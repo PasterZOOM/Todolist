@@ -9,8 +9,6 @@ type AddItemFormsPropsType = {
 
 export const AddItemForms: React.FC<AddItemFormsPropsType> = React.memo(({itemTitle, addItem}) => {
 
-    console.log('AddItemForms')
-
     const [error, setError] = useState<string | null>(null)
     const [newItemTitle, setNewItemTitle] = useState<string>('')
 
@@ -24,7 +22,7 @@ export const AddItemForms: React.FC<AddItemFormsPropsType> = React.memo(({itemTi
         } else setError('Error')
     }, [addItem, newItemTitle])
     const onKeyPressInputHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
-        error && setError(null)
+        error !== null && setError(null)
         e.key === 'Enter' && addItemValue()
     }, [error, addItemValue])
 
@@ -38,8 +36,7 @@ export const AddItemForms: React.FC<AddItemFormsPropsType> = React.memo(({itemTi
             variant="outlined"
             error={!!error}
             helperText={error && `Invalid ${itemTitle} name`}
-            size={'small'}
-        />
+            size={'small'}/>
         <Tooltip title={`Add ${itemTitle}`}>
             <IconButton onClick={addItemValue} aria-label="delete" size="medium">
                 <AddIcon/>

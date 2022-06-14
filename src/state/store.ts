@@ -7,9 +7,9 @@ const rootReducer = combineReducers({
     todolists: todolistsReducer
 })
 
-export const store = legacy_createStore(rootReducer);
+export const store = legacy_createStore(rootReducer)
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 // @ts-ignore
-window.store = store;
+window.store = store

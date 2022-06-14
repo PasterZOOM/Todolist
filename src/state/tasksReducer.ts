@@ -1,7 +1,10 @@
-
 import {v1} from 'uuid';
 import {AddTodolistAT, RemoveTodoListAT} from './todolistsReducer';
-import {TasksStateType} from '../AppWithRedux';
+import {TaskType} from '../component/Body/Todolists/Todolist/Todolist';
+
+export type TasksStateType = {
+    [key: string]: Array<TaskType>
+}
 
 export type RemoveTaskAT = ReturnType<typeof removeTaskAC>
 export type AddTaskAT = ReturnType<typeof addTaskAC>
