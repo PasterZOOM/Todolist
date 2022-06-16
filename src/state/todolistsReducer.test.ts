@@ -7,7 +7,7 @@ import {
 } from './todolistsReducer';
 import {v1} from 'uuid';
 import { TodolistType } from '../component/Body/Todolists/Todolists';
-import { FilterType } from '../component/Body/Todolists/Todolist/Todolist';
+import { FilterType } from '../component/Body/Todolists/Todolist/TodolistLogic';
 
 test('correct todolist should be added', () => {
     let todolistId1 = v1()

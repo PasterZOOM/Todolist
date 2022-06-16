@@ -1,6 +1,6 @@
 import {v1} from 'uuid';
 import {AddTodolistAT, RemoveTodoListAT} from './todolistsReducer';
-import {TaskType} from '../component/Body/Todolists/Todolist/Todolist';
+import {TaskType} from '../component/Body/Todolists/Todolist/TodolistLogic';
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>

@@ -3,13 +3,13 @@ import {IconButton, Tooltip} from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 
 export type RemoveButtonPropsType = {
-    title: string
+    tooltip: string
     onClick: () => void
 }
 
-export const RemoveButton: React.FC<RemoveButtonPropsType> = React.memo(({title, onClick}) => {
+export const RemoveButton: React.FC<RemoveButtonPropsType> = React.memo(({tooltip, onClick}) => {
     return (
-        <Tooltip title={title}>
+        <Tooltip title={tooltip}>
             <IconButton onClick={onClick} aria-label="delete" size="small">
                 <ClearIcon fontSize="inherit"/>
             </IconButton>

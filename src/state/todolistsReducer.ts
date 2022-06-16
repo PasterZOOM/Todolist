@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import {FilterType} from '../component/Body/Todolists/Todolist/Todolist';
+import {FilterType} from '../component/Body/Todolists/Todolist/TodolistLogic';
 import {TodolistType} from '../component/Body/Todolists/Todolists';
 
 export type RemoveTodoListAT = ReturnType<typeof removeTodoListAC>

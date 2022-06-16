@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {AppRootStateType} from '../../../state/store';
 import {Grid, Paper} from '@mui/material';
-import {FilterType, Todolist} from './Todolist/Todolist';
+import {FilterType, TodolistLogic} from './Todolist/TodolistLogic';
 
 export type TodolistType = {
     id: string
@@ -21,7 +21,7 @@ export const Todolists = React.memo(() => {
                     <Paper variant={'outlined'}
                            style={{padding: '10px'}}
                            square>
-                        <Todolist todolist={tl}/>
+                        <TodolistLogic todolist={tl}/>
                     </Paper>
                 </Grid>
             )}
