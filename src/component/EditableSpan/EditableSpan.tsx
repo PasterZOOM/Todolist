@@ -7,7 +7,6 @@ export type EditableSpanPropsType = {
 }
 
 export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({title, onChange}) => {
-
     let [newTitle, setTitle] = useState<string>('')
     let [editMode, setEditMode] = useState<boolean>(false)
 
@@ -15,13 +14,16 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = React.memo(({title,
         setEditMode(true)
         setTitle(title)
     }
+
     const activeViewMode = useCallback(() => {
         setEditMode(false)
         onChange(newTitle)
     }, [newTitle, onChange])
+
     const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
+
     const onKeyPressEnter = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
         e.key === 'Enter' && activeViewMode()
     }, [activeViewMode])

@@ -38,6 +38,7 @@ export const CreateTodoList = () => {
         todolistAPI.createTodoList(title)
             .then(resp => setState(resp.data))
     }
+
     const onChangeTitleHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
@@ -58,6 +59,7 @@ export const DeleteTodoList = () => {
         todolistAPI.deleteTodoList(todoListId)
             .then(resp => setState(resp.data))
     }
+
     const onChangeTodoListIdHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTodoListId(e.currentTarget.value)
     }
@@ -79,9 +81,11 @@ export const UpdateTodoList = () => {
         todolistAPI.updateTodoList(todoListId, title)
             .then(resp => setState(resp.data))
     }
+
     const onChangeTodoListIdHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTodoListId(e.currentTarget.value)
     }
+
     const onChangeTitleHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
@@ -100,11 +104,11 @@ export const GetTask = () => {
     const [state, setState] = useState<GetTasksResponseType | null>(null)
     const [todoListId, setTodoListId] = useState<string>('')
 
-
     const onClickButtonHandle = () => {
         taskAPI.getTasks(todoListId)
             .then(resp => setState(resp.data))
     }
+
     const onChangeTodoListIdHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTodoListId(e.currentTarget.value)
     }
@@ -126,9 +130,11 @@ export const CreateTask = () => {
         taskAPI.createTask(todoListId, title)
             .then(resp => setState(resp.data))
     }
+
     const onChangeTodoListIdHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTodoListId(e.currentTarget.value)
     }
+
     const onChangeTitleHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
@@ -151,9 +157,11 @@ export const DeleteTask = () => {
         taskAPI.deleteTask(todoListId, taskId)
             .then(resp => setState(resp.data))
     }
+
     const onChangeTodoListIdHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTodoListId(e.currentTarget.value)
     }
+
     const onChangeTaskIdHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTaskId(e.currentTarget.value)
     }
@@ -185,12 +193,15 @@ export const UpdateTask = () => {
         })
             .then(resp => setState(resp.data))
     }
+
     const onChangeTodoListIdHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTodoListId(e.currentTarget.value)
     }
+
     const onChangeTaskIdHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTaskId(e.currentTarget.value)
     }
+
     const onChangeTitleHandle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }

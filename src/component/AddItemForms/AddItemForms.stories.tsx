@@ -1,8 +1,7 @@
-import React from 'react';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {action} from '@storybook/addon-actions';
-import {AddItemForms} from './AddItemForms';
-
+import React from 'react'
+import {ComponentMeta, ComponentStory} from '@storybook/react'
+import {action} from '@storybook/addon-actions'
+import {AddItemForms} from './AddItemForms'
 
 export default {
     title: 'Todolist/AddItemForms',
@@ -19,7 +18,7 @@ export default {
     }
 } as ComponentMeta<typeof AddItemForms>
 
-const Template: ComponentStory<typeof AddItemForms> = (args) => <AddItemForms {...args} />;
+const Template: ComponentStory<typeof AddItemForms> = (args) => <AddItemForms {...args} />
 
-export const AddItemFormsStories = Template.bind({});
+export const AddItemFormsStories = Template.bind({})
 AddItemFormsStories.args = {}
