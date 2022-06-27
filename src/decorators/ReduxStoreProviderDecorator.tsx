@@ -1,29 +1,102 @@
-import {Provider} from 'react-redux';
-import {combineReducers, legacy_createStore} from 'redux';
-import {v1} from 'uuid';
-import { AppRootStateType } from '../state/store';
-import {tasksReducer} from '../state/tasksReducer';
-import { todolistsReducer } from '../state/todolistsReducer';
-
+import {Provider} from 'react-redux'
+import {combineReducers, legacy_createStore} from 'redux'
+import {AppRootStateType} from '../state/store'
+import {tasksReducer} from '../state/tasksReducer'
+import {todolistsReducer} from '../state/todolistsReducer'
+import {TaskPriorities, TaskStatuses} from '../api/api'
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todolistsReducer
+    todoLists: todolistsReducer
 })
 
 const initialGlobalState = {
-    todolists: [
-        {id: 'todolistId1', title: 'What to learn', filter: 'all'},
-        {id: 'todolistId2', title: 'What to buy', filter: 'all'}
+    todoLists: [
+        {id: 'todolistId1', title: 'What to learn', filter: 'All', addedDate: '', order: 1},
+        {id: 'todolistId2', title: 'What to buy', filter: 'All', addedDate: '', order: 1}
     ],
     tasks: {
-        ['todolistId1']: [
-            {id: v1(), title: 'HTML&CSS', isDone: true},
-            {id: v1(), title: 'JS', isDone: true}
+        'todolistId1': [
+            {
+                id: '1',
+                title: 'CSS',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId1',
+                completed: false,
+                deadline: '',
+                order: 1,
+                addedDate: '',
+                startDate: '',
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '2',
+                title: 'JS',
+                status: TaskStatuses.Completed,
+                todoListId: 'todolistId1',
+                completed: false,
+                deadline: '',
+                order: 1,
+                addedDate: '',
+                startDate: '',
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '3',
+                title: 'React',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId1',
+                completed: false,
+                deadline: '',
+                order: 1,
+                addedDate: '',
+                startDate: '',
+                priority: TaskPriorities.Low,
+                description: ''
+            }
         ],
-        ['todolistId2']: [
-            {id: v1(), title: 'Milk', isDone: true},
-            {id: v1(), title: 'React Book', isDone: true}
+        'todolistId2': [
+            {
+                id: '1',
+                title: 'bread',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId2',
+                completed: false,
+                deadline: '',
+                order: 1,
+                addedDate: '',
+                startDate: '',
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '2',
+                title: 'milk',
+                status: TaskStatuses.Completed,
+                todoListId: 'todolistId2',
+                completed: false,
+                deadline: '',
+                order: 1,
+                addedDate: '',
+                startDate: '',
+                priority: TaskPriorities.Low,
+                description: ''
+            },
+            {
+                id: '3',
+                title: 'tea',
+                status: TaskStatuses.New,
+                todoListId: 'todolistId2',
+                completed: false,
+                deadline: '',
+                order: 1,
+                addedDate: '',
+                startDate: '',
+                priority: TaskPriorities.Low,
+                description: ''
+            }
         ]
     }
 }

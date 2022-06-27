@@ -4,10 +4,9 @@ import {addTodolistAC} from '../../state/todolistsReducer';
 import Container from '@material-ui/core/Container';
 import {Grid} from '@mui/material';
 import {AddItemForms} from '../AddItemForms/AddItemForms';
-import { Todolists } from './Todolists/Todolists';
+import { TodoLists } from './Todolists/TodoLists';
 
 export const Body = () => {
-
     const dispatch = useDispatch()
 
     const addTodolist = useCallback((titleForNewTodolist: string) => {
@@ -19,8 +18,9 @@ export const Body = () => {
             <Grid container style={{padding: '20px'}}>
                 <AddItemForms addItem={addTodolist} itemTitle={'todolist'}/>
             </Grid>
+
             <Grid container spacing={3}>
-                <Todolists/>
+                <TodoLists/>
             </Grid>
         </Container>
     )

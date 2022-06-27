@@ -4,7 +4,7 @@ import {combineReducers, legacy_createStore} from 'redux';
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todolists: todolistsReducer
+    todoLists: todolistsReducer
 })
 
 export const store = legacy_createStore(rootReducer)

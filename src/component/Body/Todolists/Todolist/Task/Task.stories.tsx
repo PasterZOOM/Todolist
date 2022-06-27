@@ -1,7 +1,8 @@
-import React from 'react';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {action} from '@storybook/addon-actions';
-import {Task} from './Task';
+import React from 'react'
+import {ComponentMeta, ComponentStory} from '@storybook/react'
+import {action} from '@storybook/addon-actions'
+import {Task} from './Task'
+import {TaskStatuses} from '../../../../../api/api'
 
 export default {
     title: 'Todolist/Task',
@@ -34,10 +35,10 @@ const Template: ComponentStory<typeof Task> = (args) => <Task {...args} />;
 
 export const TaskNotIsDoneStories = Template.bind({});
 TaskNotIsDoneStories.args = {
-    isDone: false
+    status: TaskStatuses.New
 }
 
 export const TaskIsDoneStories = Template.bind({});
 TaskIsDoneStories.args = {
-    isDone: true
+    status: TaskStatuses.New
 }
