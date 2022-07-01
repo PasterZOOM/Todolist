@@ -53,10 +53,10 @@ export type ResponseType<T = {}> = {
 export type GetTasksResponseType = {
     items: Array<TaskType>,
     totalCount: number,
-    error: string
+    error: string | null
 }
 
-export const todolistAPI = {
+export const todoListAPI = {
     getTodoLists() {
         return instance.get<Array<TodoListType>>('/todo-lists')
     },
@@ -71,6 +71,16 @@ export const todolistAPI = {
     }
 }
 
+export type ModuleType = {
+    title: string,
+    status: TaskStatuses,
+    priority: TaskPriorities,
+    description: string,
+    completed: boolean,
+    startDate: string,
+    deadline: string
+}
+
 export const taskAPI = {
     getTasks(todoListId: string) {
         return instance.get<GetTasksResponseType>(`/todo-lists/${todoListId}/tasks`)
@@ -81,15 +91,7 @@ export const taskAPI = {
     deleteTask(todoListId: string, taskId: string) {
         return instance.delete<ResponseType>(`/todo-lists/${todoListId}/tasks/${taskId}`)
     },
-    updateTask(todoListId: string, taskId: string, module: {
-        title: string,
-        status: TaskStatuses,
-        priority: TaskPriorities,
-        description: string,
-        completed: boolean,
-        startDate: string,
-        deadline: string
-    }) {
+    updateTask(todoListId: string, taskId: string, module: ModuleType) {
         return instance.put<ResponseType<{ item: TaskType }>>(`/todo-lists/${todoListId}/tasks/${taskId}`, {...module})
     }
 }

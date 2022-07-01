@@ -6,7 +6,7 @@ import {
     TaskPriorities,
     TaskStatuses,
     TaskType,
-    todolistAPI,
+    todoListAPI,
     TodoListType
 } from './api'
 
@@ -19,7 +19,7 @@ export const GetTodolist = () => {
     const [state, setState] = useState<Array<TodoListType>>([])
 
     const onClickButtonHandle = () => {
-        todolistAPI.getTodoLists()
+        todoListAPI.getTodoLists()
             .then(resp => setState(resp.data))
     }
 
@@ -35,7 +35,7 @@ export const CreateTodoList = () => {
     const [title, setTitle] = useState<string>('')
 
     const onClickButtonHandle = () => {
-        todolistAPI.createTodoList(title)
+        todoListAPI.createTodoList(title)
             .then(resp => setState(resp.data))
     }
 
@@ -56,7 +56,7 @@ export const DeleteTodoList = () => {
     const [todoListId, setTodoListId] = useState<string>('')
 
     const onClickButtonHandle = () => {
-        todolistAPI.deleteTodoList(todoListId)
+        todoListAPI.deleteTodoList(todoListId)
             .then(resp => setState(resp.data))
     }
 
@@ -78,7 +78,7 @@ export const UpdateTodoList = () => {
     const [title, setTitle] = useState<string>('')
 
     const onClickButtonHandle = () => {
-        todolistAPI.updateTodoList(todoListId, title)
+        todoListAPI.updateTodoList(todoListId, title)
             .then(resp => setState(resp.data))
     }
 

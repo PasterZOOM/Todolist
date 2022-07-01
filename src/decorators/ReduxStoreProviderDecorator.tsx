@@ -2,12 +2,12 @@ import {Provider} from 'react-redux'
 import {combineReducers, legacy_createStore} from 'redux'
 import {AppRootStateType} from '../state/store'
 import {tasksReducer} from '../state/tasksReducer'
-import {todolistsReducer} from '../state/todolistsReducer'
+import {todoListsReducer} from '../state/todoListsReducer'
 import {TaskPriorities, TaskStatuses} from '../api/api'
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
-    todoLists: todolistsReducer
+    todoLists: todoListsReducer
 })
 
 const initialGlobalState = {

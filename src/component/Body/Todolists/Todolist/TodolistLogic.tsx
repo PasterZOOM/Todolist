@@ -1,11 +1,10 @@
-import React, {useCallback} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {AppRootStateType} from '../../../../state/store'
-import {changeTodolistFilterAC, changeTodolistTitleAC, removeTodoListAC} from '../../../../state/todolistsReducer'
-import {addTaskAC} from '../../../../state/tasksReducer'
+import React, {useCallback, useEffect} from 'react'
+import {changeTodolistFilterAC, changeTodolistTitleTC, removeTodoListTC} from '../../../../state/todoListsReducer'
+import {addTaskTC, fetchTasksTC} from '../../../../state/tasksReducer'
 import {Todolist} from './Todolist'
-import {TaskStatuses, TaskType} from '../../../../api/api'
+import {TaskStatuses} from '../../../../api/api'
 import {TodoListDomainType} from '../TodoLists'
+import {useAppDispatch, useAppSelector} from '../../../../hooks/hooks'
 
 export type FilterType = 'All' | 'Active' | 'Completed'
 
@@ -14,16 +13,16 @@ type TodolistLogicPropsType = {
 }
 
 export const TodolistLogic: React.FC<TodolistLogicPropsType> = React.memo(({todolist}) => {
-    const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todolist.id])
+    const tasks = useAppSelector(state => state.tasks[todolist.id])
 
-    let dispatch = useDispatch()
+    let dispatch = useAppDispatch()
 
     const removeTodolist = useCallback(() => {
-        dispatch(removeTodoListAC(todolist.id))
+        dispatch(removeTodoListTC(todolist.id))
     }, [dispatch, todolist.id])
 
     const changeTodolistTitle = useCallback((title: string) => {
-        dispatch(changeTodolistTitleAC(todolist.id, title))
+        dispatch(changeTodolistTitleTC(todolist.id, title))
     }, [dispatch, todolist.id])
 
     const changeTodolistFilter = useCallback((filter: FilterType) => {
@@ -31,7 +30,11 @@ export const TodolistLogic: React.FC<TodolistLogicPropsType> = React.memo(({todo
     }, [dispatch, todolist.id])
 
     const addTask = useCallback((title: string) => {
-        dispatch(addTaskAC(todolist.id, title))
+        dispatch(addTaskTC(todolist.id, title))
+    }, [dispatch, todolist.id])
+
+    useEffect(() => {
+        dispatch(fetchTasksTC(todolist.id))
     }, [dispatch, todolist.id])
 
     let filteredTasks

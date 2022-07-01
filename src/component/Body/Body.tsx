@@ -1,16 +1,21 @@
-import {useDispatch} from 'react-redux';
-import React, {useCallback} from 'react';
-import {addTodolistAC} from '../../state/todolistsReducer';
-import Container from '@material-ui/core/Container';
-import {Grid} from '@mui/material';
-import {AddItemForms} from '../AddItemForms/AddItemForms';
-import { TodoLists } from './Todolists/TodoLists';
+import React, {useCallback, useEffect} from 'react'
+import {addTodoListTC, fetchTodoListsTC} from '../../state/todoListsReducer'
+import Container from '@material-ui/core/Container'
+import {Grid} from '@mui/material'
+import {AddItemForms} from '../AddItemForms/AddItemForms'
+import {TodoLists} from './Todolists/TodoLists'
+import {useAppDispatch} from '../../hooks/hooks'
 
 export const Body = () => {
-    const dispatch = useDispatch()
 
-    const addTodolist = useCallback((titleForNewTodolist: string) => {
-        dispatch(addTodolistAC(titleForNewTodolist))
+    const dispatch = useAppDispatch()
+
+    const addTodolist = useCallback((title: string) => {
+        dispatch(addTodoListTC(title))
+    }, [dispatch])
+
+    useEffect(() => {
+        dispatch(fetchTodoListsTC())
     }, [dispatch])
 
     return (
