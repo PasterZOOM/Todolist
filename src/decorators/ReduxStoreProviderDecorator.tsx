@@ -1,9 +1,10 @@
 import {Provider} from 'react-redux'
 import {combineReducers, legacy_createStore} from 'redux'
 import {AppRootStateType} from '../state/store'
-import {tasksReducer} from '../state/tasksReducer'
-import {TodoListFilter, todoListsReducer} from '../state/todoListsReducer'
+import {tasksReducer} from '../component/App/Body/Todolists/Todolist/Task/tasksReducer'
+import {TodoListFilter, todoListsReducer} from '../component/App/Body/Todolists/todoListsReducer'
 import {TaskPriorities, TaskStatuses} from '../api/api'
+import {RequestStatusType} from '../component/App/appReducer'
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
@@ -12,8 +13,8 @@ const rootReducer = combineReducers({
 
 const initialGlobalState = {
     todoLists: [
-        {id: 'todolistId1', title: 'What to learn', filter: TodoListFilter.All, addedDate: '', order: 1},
-        {id: 'todolistId2', title: 'What to buy', filter: TodoListFilter.All, addedDate: '', order: 1}
+        {id: 'todolistId1', title: 'What to learn', filter: TodoListFilter.ALL, addedDate: '', order: 1, entityStatus: RequestStatusType.IDLE},
+        {id: 'todolistId2', title: 'What to buy', filter: TodoListFilter.ALL, addedDate: '', order: 1, entityStatus: RequestStatusType.IDLE}
     ],
     tasks: {
         'todolistId1': [
@@ -98,6 +99,10 @@ const initialGlobalState = {
                 description: ''
             }
         ]
+    },
+    app: {
+        status: RequestStatusType.IDLE,
+        error: null
     }
 }
 

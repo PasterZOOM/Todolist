@@ -4,10 +4,11 @@ import AddIcon from '@mui/icons-material/Add'
 
 type AddItemFormsPropsType = {
     itemTitle: string
+    disabled?: boolean
     addItem: (title: string) => void
 }
 
-export const AddItemForms: React.FC<AddItemFormsPropsType> = React.memo(({itemTitle, addItem}) => {
+export const AddItemForms: React.FC<AddItemFormsPropsType> = React.memo(({itemTitle, addItem, disabled}) => {
     const [error, setError] = useState<string | null>(null)
     const [newItemTitle, setNewItemTitle] = useState<string>('')
 
@@ -37,10 +38,11 @@ export const AddItemForms: React.FC<AddItemFormsPropsType> = React.memo(({itemTi
                    variant="outlined"
                    error={!!error}
                    helperText={error && `Invalid ${itemTitle} name`}
-                   size={'small'}/>
+                   size={'small'}
+                   disabled={disabled}/>
 
         <Tooltip title={`Add ${itemTitle}`}>
-            <IconButton onClick={addItemValue} aria-label="delete" size="medium">
+            <IconButton onClick={addItemValue} aria-label="delete" size="medium" disabled={disabled}>
                 <AddIcon/>
             </IconButton>
         </Tooltip>
