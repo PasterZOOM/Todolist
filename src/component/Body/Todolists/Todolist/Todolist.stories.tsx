@@ -2,6 +2,7 @@ import React from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
 import {Todolist} from './Todolist';
+import { TodoListFilter } from '../../../../state/todoListsReducer';
 
 export default {
     title: 'Todolist/Todolist',
@@ -12,7 +13,7 @@ export default {
             description: 'Todolist name',
         },
         filter: {
-            defaultValue: 'All',
+            defaultValue: TodoListFilter.All,
             description: 'Filter value'
         },
         todolistId: {

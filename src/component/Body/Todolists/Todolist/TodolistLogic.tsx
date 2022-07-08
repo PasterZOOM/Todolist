@@ -1,12 +1,16 @@
 import React, {useCallback, useEffect} from 'react'
-import {changeTodolistFilterAC, changeTodolistTitleTC, removeTodoListTC} from '../../../../state/todoListsReducer'
+import {
+    changeTodolistFilterAC,
+    changeTodolistTitleTC,
+    removeTodoListTC,
+    TodoListDomainType,
+    TodoListFilter
+} from '../../../../state/todoListsReducer'
 import {addTaskTC, fetchTasksTC} from '../../../../state/tasksReducer'
 import {Todolist} from './Todolist'
 import {TaskStatuses} from '../../../../api/api'
-import {TodoListDomainType} from '../TodoLists'
 import {useAppDispatch, useAppSelector} from '../../../../hooks/hooks'
 
-export type FilterType = 'All' | 'Active' | 'Completed'
 
 type TodolistLogicPropsType = {
     todolist: TodoListDomainType
@@ -25,7 +29,7 @@ export const TodolistLogic: React.FC<TodolistLogicPropsType> = React.memo(({todo
         dispatch(changeTodolistTitleTC(todolist.id, title))
     }, [dispatch, todolist.id])
 
-    const changeTodolistFilter = useCallback((filter: FilterType) => {
+    const changeTodolistFilter = useCallback((filter: TodoListFilter) => {
         dispatch(changeTodolistFilterAC(todolist.id, filter))
     }, [dispatch, todolist.id])
 
@@ -38,8 +42,8 @@ export const TodolistLogic: React.FC<TodolistLogicPropsType> = React.memo(({todo
     }, [dispatch, todolist.id])
 
     let filteredTasks
-    todolist.filter === 'Active' ? filteredTasks = tasks.filter(task => task.status === TaskStatuses.New) :
-        todolist.filter === 'Completed' ? filteredTasks = tasks.filter(task => task.status === TaskStatuses.Completed) :
+    todolist.filter === TodoListFilter.Active ? filteredTasks = tasks.filter(task => task.status === TaskStatuses.New) :
+        todolist.filter === TodoListFilter.Completed ? filteredTasks = tasks.filter(task => task.status === TaskStatuses.Completed) :
             filteredTasks = tasks
 
     return <Todolist title={todolist.title}

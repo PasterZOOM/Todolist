@@ -1,32 +1,28 @@
 import React from 'react'
 import {EditableSpan} from '../../../EditableSpan/EditableSpan'
 import {RemoveButton} from '../../../Buttons/RemoveButton/RemoveButton'
-import {AddItemForms} from '../../../AddItemForms/AddItemForms'
+import {AddItemForms} from '../../../common/AddItemForms/AddItemForms'
 import {TaskLogic} from './Task/TaskLogic'
 import {Button} from '@mui/material'
-import {FilterType} from './TodolistLogic'
 import {TaskType} from '../../../../api/api'
+import {TodoListFilter} from '../../../../state/todoListsReducer'
 
 export type TodolistPropsType = {
     title: string
-    filter: FilterType
     todolistId: string
+    filter: TodoListFilter
     tasks: Array<TaskType>
     removeTodolist: () => void
-    changeTodolistTitle: (newTitle: string) => void
-    changeTodolistFilter: (newFilter: FilterType) => void
     addTask: (title: string) => void
+    changeTodolistTitle: (newTitle: string) => void
+    changeTodolistFilter: (newFilter: TodoListFilter) => void
 }
-export const Todolist: React.FC<TodolistPropsType> = React.memo(({
-                                                                     title,
-                                                                     filter,
-                                                                     todolistId,
-                                                                     tasks,
-                                                                     changeTodolistTitle,
-                                                                     removeTodolist,
-                                                                     changeTodolistFilter,
-                                                                     addTask
-                                                                 }) => {
+export const Todolist: React.FC<TodolistPropsType> = React.memo((
+    {
+        title, todolistId, filter, tasks,
+        removeTodolist, addTask, changeTodolistTitle, changeTodolistFilter
+    }
+) => {
     return (
         <div>
             <h3>
@@ -36,20 +32,21 @@ export const Todolist: React.FC<TodolistPropsType> = React.memo(({
 
             <AddItemForms addItem={addTask} itemTitle={'task'}/>
 
-            <div>{tasks && tasks.map(task => <TaskLogic key={task.id}
-                                               task={task}
-                                               todolistId={todolistId}/>)}
+            <div>
+                {tasks && tasks.map(task => <TaskLogic key={task.id}
+                                                       task={task}
+                                                       todolistId={todolistId}/>)}
             </div>
 
             <div>
-                <Button variant={filter === 'All' ? 'outlined' : 'text'}
-                        onClick={() => changeTodolistFilter('All')}>
+                <Button variant={filter === TodoListFilter.All ? 'outlined' : 'text'}
+                        onClick={() => changeTodolistFilter(TodoListFilter.All)}>
                     All</Button>
-                <Button variant={filter === 'Active' ? 'outlined' : 'text'}
-                        onClick={() => changeTodolistFilter('Active')}>
+                <Button variant={filter === TodoListFilter.Active ? 'outlined' : 'text'}
+                        onClick={() => changeTodolistFilter(TodoListFilter.All)}>
                     Active</Button>
-                <Button variant={filter === 'Completed' ? 'outlined' : 'text'}
-                        onClick={() => changeTodolistFilter('Completed')}>
+                <Button variant={filter === TodoListFilter.Completed ? 'outlined' : 'text'}
+                        onClick={() => changeTodolistFilter(TodoListFilter.All)}>
                     Completed</Button>
             </div>
         </div>

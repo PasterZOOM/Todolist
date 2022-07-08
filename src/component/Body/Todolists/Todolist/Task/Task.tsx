@@ -7,32 +7,31 @@ import {RemoveButton} from '../../../../Buttons/RemoveButton/RemoveButton'
 import {TaskStatuses} from '../../../../../api/api'
 
 export type TaskPropsType = {
-    changeTaskStatus: (e: ChangeEvent<HTMLInputElement>) => void,
-    changeTaskTitle: (newTitle: string) => void,
-    removeTask: () => void,
-    title: string,
+    title: string
     status: TaskStatuses
+    removeTask: () => void
+    changeTaskTitle: (newTitle: string) => void
+    changeTaskStatus: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Task: React.FC<TaskPropsType> = React.memo(({
-                                                             title,
-                                                             status,
-                                                             changeTaskStatus,
-                                                             changeTaskTitle,
-                                                             removeTask
-                                                         }) => (
+export const Task: React.FC<TaskPropsType> = React.memo((
+        {
+            title, status,
+            removeTask, changeTaskTitle, changeTaskStatus
+        }
+    ) => (
         <div style={status === TaskStatuses.Completed ? {opacity: '0.5'} : {opacity: '1'}}>
 
             <Checkbox onChange={changeTaskStatus}
                       checked={status === TaskStatuses.Completed}
                       size="small"
                       icon={<BookmarkBorderIcon/>}
-                      checkedIcon={<BookmarkIcon/>}/>
+                      checkedIcon={<BookmarkIcon/>}
+            />
 
             <EditableSpan title={title} onChange={changeTaskTitle}/>
 
             <RemoveButton tooltip={'Remove task'} onClick={removeTask}/>
-
         </div>
     )
 )

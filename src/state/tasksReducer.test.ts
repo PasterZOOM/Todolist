@@ -257,7 +257,7 @@ test('correct task should be added to correct array', () => {
         ]
     }
 
-    const action = addTaskAC('todolistId2',  {
+    const action = addTaskAC( {
         id: '4',
         title: 'juice',
         status: TaskStatuses.New,

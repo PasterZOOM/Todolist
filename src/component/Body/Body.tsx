@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from 'react'
 import {addTodoListTC, fetchTodoListsTC} from '../../state/todoListsReducer'
 import Container from '@material-ui/core/Container'
 import {Grid} from '@mui/material'
-import {AddItemForms} from '../AddItemForms/AddItemForms'
+import {AddItemForms} from '../common/AddItemForms/AddItemForms'
 import {TodoLists} from './Todolists/TodoLists'
 import {useAppDispatch} from '../../hooks/hooks'
 

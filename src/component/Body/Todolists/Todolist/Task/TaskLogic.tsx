@@ -5,8 +5,8 @@ import {Task} from './Task'
 import {useAppDispatch} from '../../../../../hooks/hooks'
 
 export type LogicTaskPropsType = {
-    task: TaskType
     todolistId: string
+    task: TaskType
 }
 
 export const TaskLogic: React.FC<LogicTaskPropsType> = React.memo(({task, todolistId}) => {
@@ -26,10 +26,13 @@ export const TaskLogic: React.FC<LogicTaskPropsType> = React.memo(({task, todoli
         dispatch(changeTaskStatusTC(todolistId, id, e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New))
     }, [dispatch, todolistId, id])
 
-    return <Task title={title}
-                 status={status}
-                 removeTask={removeTask}
-                 changeTaskTitle={changeTaskTitle}
-                 changeTaskStatus={changeTaskStatus}/>
+    return (
+        <Task title={title}
+              status={status}
+              removeTask={removeTask}
+              changeTaskTitle={changeTaskTitle}
+              changeTaskStatus={changeTaskStatus}
+        />
+    )
 })
 

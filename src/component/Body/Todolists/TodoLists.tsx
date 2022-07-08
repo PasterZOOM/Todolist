@@ -1,13 +1,9 @@
 import React from 'react'
 import {Grid, Paper} from '@mui/material'
-import {FilterType, TodolistLogic} from './Todolist/TodolistLogic'
-import {TodoListType} from '../../../api/api'
+import {TodolistLogic} from './Todolist/TodolistLogic'
 import {useAppSelector} from '../../../hooks/hooks'
 
-export type TodoListDomainType = TodoListType & {
-    filter: FilterType
-}
-export const TodoLists = React.memo(() => {
+export const TodoLists = () => {
     const todoLists = useAppSelector(state => state.todoLists)
 
     return (
@@ -21,4 +17,4 @@ export const TodoLists = React.memo(() => {
             </Grid>)}
         </>
     )
-})
+}
