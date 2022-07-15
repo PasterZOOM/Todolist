@@ -47,9 +47,7 @@ export const TodolistLogic: React.FC<TodolistLogicPropsType> = React.memo(({todo
         todolist.filter === TodoListFilter.COMPLETED ? filteredTasks = tasks.filter(task => task.status === TaskStatuses.Completed) :
             filteredTasks = tasks
 
-    return <Todolist title={todolist.title}
-                     filter={todolist.filter}
-                     todolistId={todolist.id}
+    return <Todolist todoList={todolist}
                      disabled={todolist.entityStatus === RequestStatusType.LOADING}
                      tasks={filteredTasks}
                      removeTodolist={removeTodolist}

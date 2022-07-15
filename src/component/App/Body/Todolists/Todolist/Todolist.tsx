@@ -5,12 +5,10 @@ import {AddItemForms} from '../../../../common/AddItemForms/AddItemForms'
 import {TaskLogic} from './Task/TaskLogic'
 import {Button} from '@mui/material'
 import {TaskType} from '../../../../../api/api'
-import {TodoListFilter} from '../todoListsReducer'
+import {TodoListDomainType, TodoListFilter} from '../todoListsReducer'
 
 export type TodolistPropsType = {
-    title: string
-    todolistId: string
-    filter: TodoListFilter
+    todoList: TodoListDomainType
     tasks: Array<TaskType>
     disabled: boolean
     removeTodolist: () => void
@@ -20,14 +18,14 @@ export type TodolistPropsType = {
 }
 export const Todolist: React.FC<TodolistPropsType> = React.memo((
     {
-        title, todolistId, filter, tasks, disabled,
+        todoList, tasks, disabled,
         removeTodolist, addTask, changeTodolistTitle, changeTodolistFilter
     }
 ) => {
     return (
         <div>
             <h3>
-                <EditableSpan title={title} onChange={changeTodolistTitle}/>
+                <EditableSpan title={todoList.title} onChange={changeTodolistTitle}/>
                 <RemoveButton tooltip={'Remove todolist'} onClick={removeTodolist} disabled={disabled}/>
             </h3>
 
@@ -36,17 +34,17 @@ export const Todolist: React.FC<TodolistPropsType> = React.memo((
             <div>
                 {tasks && tasks.map(task => <TaskLogic key={task.id}
                                                        task={task}
-                                                       todolistId={todolistId}/>)}
+                                                       todolistId={todoList.id}/>)}
             </div>
 
             <div>
-                <Button variant={filter === TodoListFilter.ALL ? 'outlined' : 'text'}
+                <Button variant={todoList.filter === TodoListFilter.ALL ? 'outlined' : 'text'}
                         onClick={() => changeTodolistFilter(TodoListFilter.ALL)}>
                     All</Button>
-                <Button variant={filter === TodoListFilter.ACTIVE ? 'outlined' : 'text'}
+                <Button variant={todoList.filter === TodoListFilter.ACTIVE ? 'outlined' : 'text'}
                         onClick={() => changeTodolistFilter(TodoListFilter.ACTIVE)}>
                     Active</Button>
-                <Button variant={filter === TodoListFilter.COMPLETED ? 'outlined' : 'text'}
+                <Button variant={todoList.filter === TodoListFilter.COMPLETED ? 'outlined' : 'text'}
                         onClick={() => changeTodolistFilter(TodoListFilter.COMPLETED)}>
                     Completed</Button>
             </div>

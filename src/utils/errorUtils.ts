@@ -1,6 +1,6 @@
 import {Dispatch} from 'redux'
 import {ResponseType} from '../api/api'
-import {RequestStatusType, setAppErrorAC, setAppStatusAC } from '../component/App/appReducer'
+import {RequestStatusType, setAppErrorAC, setAppStatusAC} from '../component/App/appReducer'
 import {AppActionsType} from '../state/store'
 
 
@@ -9,13 +9,14 @@ export const handleServerAppError = <T>(data: ResponseType<T>, dispatch: ErrorUt
     if (data.messages.length) {
         dispatch(setAppErrorAC(data.messages[0]))
     } else {
-        dispatch(setAppErrorAC('Some error'))
+        dispatch(setAppErrorAC('Some error occurred'))
     }
     dispatch(setAppStatusAC(RequestStatusType.FAILED))
 }
 
 export const handleServerNetworkError = (error: { message: string }, dispatch: ErrorUtilsDispatchType) => {
-    dispatch(setAppErrorAC(error.message))
+    console.log(error)
+    dispatch(setAppErrorAC(error.message ? error.message : 'Some error occurred'))
     dispatch(setAppStatusAC(RequestStatusType.FAILED))
 }
 

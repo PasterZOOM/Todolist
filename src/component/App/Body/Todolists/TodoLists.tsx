@@ -7,14 +7,15 @@ export const TodoLists = () => {
     const todoLists = useAppSelector(state => state.todoLists)
 
     return (
-        <>{todoLists && todoLists.map(tl =>
-            <Grid item key={tl.id}>
-                <Paper variant={'outlined'}
-                       style={{padding: '10px'}}
-                       square>
-                    <TodolistLogic todolist={tl}/>
-                </Paper>
-            </Grid>)}
+        <>
+            {todoLists && todoLists.map(tl =>
+                <Grid item key={tl.id}>
+                    <Paper variant={'outlined'}
+                           style={{padding: '10px'}}
+                           square>
+                        <TodolistLogic todolist={tl}/>
+                    </Paper>
+                </Grid>)}
         </>
     )
 }
