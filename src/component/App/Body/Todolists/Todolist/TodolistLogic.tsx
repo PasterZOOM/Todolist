@@ -10,7 +10,7 @@ import {addTaskTC, fetchTasksTC} from './Task/tasksReducer'
 import {Todolist} from './Todolist'
 import {TaskStatuses} from '../../../../../api/api'
 import {useAppDispatch, useAppSelector} from '../../../../../hooks/hooks'
-import { RequestStatusType } from '../../../appReducer'
+import {RequestStatusType} from '../../../appReducer'
 
 
 type TodolistLogicPropsType = {
@@ -31,7 +31,7 @@ export const TodolistLogic: React.FC<TodolistLogicPropsType> = React.memo(({todo
     }, [dispatch, todolist.id])
 
     const changeTodolistFilter = useCallback((filter: TodoListFilter) => {
-        dispatch(changeTodolistFilterAC(todolist.id, filter))
+        dispatch(changeTodolistFilterAC({todoListId: todolist.id, filter: filter}))
     }, [dispatch, todolist.id])
 
     const addTask = useCallback((title: string) => {

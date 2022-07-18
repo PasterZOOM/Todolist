@@ -3,6 +3,7 @@ import {AppThunkType} from '../../state/store'
 import {handleServerAppError, handleServerNetworkError} from '../../utils/errorUtils'
 import {setIsLoggedInAC} from './Login/authReducer'
 import {AxiosError} from 'axios'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
 export enum RequestStatusType {
     IDLE = 'idle',
@@ -17,45 +18,44 @@ const initialState = {
     isInitialized: false
 }
 
-export const appReducer = (state: AppStateType = initialState, action: AppReducerActionType): AppStateType => {
-    switch (action.type) {
-        case 'APP/SET-STATUS':
-            return {...state, status: action.status}
-        case 'APP/SET-ERROR':
-            return {...state, error: action.error}
-        case 'APP/SET-IS-INITIALIZED':
-            return {...state, isInitialized: action.isInitialized}
-        default:
-            return state
+const slice = createSlice({
+    name: 'app',
+    initialState: initialState,
+    reducers: {
+        setAppStatusAC(state, action: PayloadAction<{ status: RequestStatusType }>) {
+            state.status = action.payload.status
+        },
+        setAppErrorAC(state, action: PayloadAction<{ error: string | null }>) {
+            state.error = action.payload.error
+        },
+        setIsInitializedAC(state, action: PayloadAction<{ isInitialized: boolean }>) {
+            state.isInitialized = action.payload.isInitialized
+        }
     }
-}
+})
 
-//actions
-export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
-export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
-export const setIsInitializedAC = (isInitialized: boolean) => ({type: 'APP/SET-IS-INITIALIZED', isInitialized} as const)
+export const appReducer = slice.reducer
+export const {setAppStatusAC, setAppErrorAC, setIsInitializedAC} = slice.actions
 
 //thunks
 export const initializeAppTC = (): AppThunkType => async (dispatch) => {
     try {
         const res = await authAPI.me()
         if (res.data.resultCode === 0) {
-            dispatch(setIsLoggedInAC(true))
-            dispatch(setAppStatusAC(RequestStatusType.SUCCEEDED))
+            dispatch(setIsLoggedInAC({value: true}))
+            dispatch(setAppStatusAC({status: RequestStatusType.SUCCEEDED}))
         } else {
             handleServerAppError(res.data, dispatch)
         }
     } catch (error) {
-        const typedError = error as AxiosError
+        const typedError = error as Error | AxiosError
         handleServerNetworkError(typedError, dispatch)
     } finally {
-        dispatch(setIsInitializedAC(true))
+        dispatch(setIsInitializedAC({isInitialized: true}))
     }
 }
 
 //types
-export type AppStateType = typeof initialState
-
 export type SetAppStatusAT = ReturnType<typeof setAppStatusAC>
 export type SetAppErrorAT = ReturnType<typeof setAppErrorAC>
 export type SetIsInitializedAT = ReturnType<typeof setIsInitializedAC>

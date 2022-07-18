@@ -2,7 +2,7 @@ import React from 'react'
 import MuiAlert, {AlertProps} from '@mui/material/Alert'
 import {useAppDispatch, useAppSelector} from '../../../hooks/hooks'
 import Snackbar from '@mui/material/Snackbar'
-import { setAppErrorAC } from '../../App/appReducer'
+import {setAppErrorAC} from '../../App/appReducer'
 
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -18,7 +18,7 @@ export const ErrorSnackbar = () => {
         if (reason === 'clickaway') {
             return
         }
-        dispatch(setAppErrorAC(null))
+        dispatch(setAppErrorAC({error: null}))
     }
     return (
         <Snackbar open={!!error} autoHideDuration={6000} onClose={handleClose}>
