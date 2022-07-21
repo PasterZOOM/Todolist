@@ -40,5 +40,5 @@ TaskNotIsDoneStories.args = {
 
 export const TaskIsDoneStories = Template.bind({});
 TaskIsDoneStories.args = {
-    status: TaskStatuses.New
+    status: TaskStatuses.Completed
 }

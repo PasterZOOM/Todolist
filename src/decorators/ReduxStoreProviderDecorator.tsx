@@ -29,7 +29,7 @@ const initialGlobalState = {
                 addedDate: '',
                 startDate: '',
                 priority: TaskPriorities.Low,
-                description: ''
+                description: '',
             },
             {
                 id: '2',

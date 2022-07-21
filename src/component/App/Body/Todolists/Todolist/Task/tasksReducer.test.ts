@@ -91,7 +91,6 @@ beforeEach(() => (
     }))
 
 test('correct task should be deleted from correct array', () => {
-
     const action = removeTaskAC({todoListId: 'todolistId2', taskId: '2'})
     const endState = tasksReducer(startState, action)
 
@@ -169,21 +168,20 @@ test('correct task should be deleted from correct array', () => {
 })
 
 test('correct task should be added to correct array', () => {
-    const action = addTaskAC({
-        task: {
-            id: '4',
-            title: 'juice',
-            status: TaskStatuses.New,
-            todoListId: 'todolistId2',
-            completed: false,
-            deadline: '',
-            order: 1,
-            addedDate: '',
-            startDate: '',
-            priority: TaskPriorities.Low,
-            description: ''
-        }
-    })
+    let task = {
+        id: '4',
+        title: 'juice',
+        status: TaskStatuses.New,
+        todoListId: 'todolistId2',
+        completed: false,
+        deadline: '',
+        order: 1,
+        addedDate: '',
+        startDate: '',
+        priority: TaskPriorities.Low,
+        description: ''
+    }
+    const action = addTaskAC(task)
     const endState = tasksReducer(startState, action)
 
     expect(endState['todolistId1'].length).toBe(3)
