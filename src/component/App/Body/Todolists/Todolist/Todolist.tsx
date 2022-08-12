@@ -1,11 +1,14 @@
 import React from 'react'
-import {EditableSpan} from '../../../../common/EditableSpan/EditableSpan'
-import {RemoveButton} from '../../../../common/Buttons/RemoveButton/RemoveButton'
-import {AddItemForms} from '../../../../common/AddItemForms/AddItemForms'
-import {TaskLogic} from './Task/TaskLogic'
 import {Button} from '@mui/material'
-import {TaskType} from '../../../../../api/api'
-import {TodoListDomainType, TodoListFilter} from '../todoListsReducer'
+import {TaskType} from 'api/api'
+import { EditableSpan } from 'component/common/EditableSpan/EditableSpan'
+import {TaskLogic} from 'component/App/Body/Todolists/Todolist/Task/TaskLogic'
+import {
+  TodoListDomainType,
+  TodoListFilter
+} from 'component/App/Body/Todolists/todoListsReducer'
+import {AddItemForms} from 'component/common/AddItemForms/AddItemForms'
+import {RemoveButton} from 'component/common/Buttons/RemoveButton/RemoveButton'
 
 export type TodolistPropsType = {
     todoList: TodoListDomainType
@@ -34,7 +37,7 @@ export const Todolist: React.FC<TodolistPropsType> = React.memo((
             <div>
                 {tasks && tasks.map(task => <TaskLogic key={task.id}
                                                        task={task}
-                                                       todolistId={todoList.id}/>)}
+                                                       todoListId={todoList.id}/>)}
             </div>
 
             <div>

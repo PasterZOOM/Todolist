@@ -2,7 +2,7 @@ import AppBar from '@mui/material/AppBar'
 import {Button, IconButton, Toolbar, Typography} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import React from 'react'
-import {useAppDispatch, useAppSelector} from '../../../hooks/hooks'
+import {useAppDispatch, useAppSelector} from 'hooks/hooks'
 import {logoutTC} from '../Login/authReducer'
 
 export const Header = () => {

@@ -2,9 +2,9 @@ import React, {ChangeEvent} from 'react'
 import {Checkbox} from '@mui/material'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
-import {EditableSpan} from '../../../../../common/EditableSpan/EditableSpan'
-import {RemoveButton} from '../../../../../common/Buttons/RemoveButton/RemoveButton'
-import {TaskStatuses} from '../../../../../../api/api'
+import {TaskStatuses} from 'api/api'
+import {EditableSpan} from 'component/common/EditableSpan/EditableSpan'
+import {RemoveButton} from 'component/common/Buttons/RemoveButton/RemoveButton'
 
 export type TaskPropsType = {
     title: string

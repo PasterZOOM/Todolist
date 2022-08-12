@@ -4,14 +4,14 @@ import FormControl from '@mui/material/FormControl'
 import FormGroup from '@mui/material/FormGroup'
 import FormLabel from '@mui/material/FormLabel'
 import TextField from '@mui/material/TextField'
-import {useFormik} from 'formik'
-import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel'
 import Button from '@mui/material/Button/Button'
+import FormControlLabel from '@mui/material/FormControlLabel/FormControlLabel'
+import {useFormik} from 'formik'
 import Checkbox from '@mui/material/Checkbox'
 import {loginTC} from './authReducer'
 
 import {Navigate} from 'react-router-dom'
-import {useAppDispatch, useAppSelector} from '../../../hooks/hooks'
+import {useAppDispatch, useAppSelector} from 'hooks/hooks'
 
 type FormikErrorType = {
     email?: string
@@ -34,7 +34,7 @@ export const Login = () => {
             const errors: FormikErrorType = {}
             if (!values.email) {
                 errors.email = 'Required'
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            } else if (!/^[A-Z\d._%+-]+@[A-Z\d.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address'
             }
             if (!values.password) {
@@ -80,7 +80,9 @@ export const Login = () => {
                                           control={<Checkbox/>}
                                           checked={formik.values.rememberMe}
                                           {...formik.getFieldProps('rememberMe')}/>
-                        <Button type={'submit'} variant={'contained'} color={'primary'}>
+                        <Button type="submit"
+                                variant="contained"
+                                color="primary" fullWidth>
                             Login
                         </Button>
                     </FormGroup>
