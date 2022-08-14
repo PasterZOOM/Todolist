@@ -4,8 +4,8 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 import {BrowserRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
-import {App} from './component/App/App'
-import {store} from './state/store'
+import {store} from 'App/store'
+import { App } from 'App/App'
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
