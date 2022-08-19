@@ -3,7 +3,7 @@ import {todoListAPI} from 'api/todoListAPI'
 import {taskAPI} from 'api/taskAPI'
 import {TaskPriorities, TaskStatuses} from 'common/enums/projectEnums'
 import {TaskType} from 'features/Task/TaskType'
-import {TodoListType} from 'features/Todolist/TodoistTypes'
+import {TodoListType} from 'features/Todolist/TodoListTypes'
 import {GetTasksResponseType, ResponseType} from 'api/ResponseTypes'
 
 export default {

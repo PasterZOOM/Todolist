@@ -2,47 +2,43 @@ import React, {useCallback, useEffect} from 'react'
 import Container from '@material-ui/core/Container'
 import Grid from '@mui/material/Grid'
 import {Navigate} from 'react-router-dom'
-import {useAppDispatch, useAppSelector} from 'common/hooks/hooks'
+import {useActions, useAppSelector} from 'common/hooks/hooks'
 import {AddItemForms} from 'common/components/AddItemForms/AddItemForms'
-import {Paper} from '@mui/material'
 import {TodoList} from 'features/Todolist/TodoList'
 import {getTodoLists} from 'features/Todolist/todolistSelectors'
 import {getIsLoggedIn} from 'features/Auth/authSelectors'
-import {addTodoList, fetchTodoLists} from 'features/Todolist/todolistActions'
+import {todoListsActions} from 'features/Todolist'
+
 
 export const Body = () => {
 
-  const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector(getIsLoggedIn)
   const todoLists = useAppSelector(getTodoLists)
+  const {addTodoList, fetchTodoLists} = useActions(todoListsActions)
 
   const addTodolistCB = useCallback((title: string) => {
-    dispatch(addTodoList(title))
-  }, [dispatch])
+    addTodoList(title)
+  }, [addTodoList])
 
   useEffect(() => {
     if (!isLoggedIn) {
       return
     }
-    dispatch(fetchTodoLists())
-  }, [dispatch, isLoggedIn])
+    fetchTodoLists()
+  }, [fetchTodoLists, isLoggedIn])
 
   if (!isLoggedIn) return <Navigate to={'/login'}/>
 
   return (
-    <Container style={{maxWidth: '950px'}}>
+    <Container fixed>
       <Grid container style={{padding: '20px 0'}}>
         <AddItemForms addItem={addTodolistCB} itemTitle={'todolist'}/>
       </Grid>
 
-      <Grid container spacing={3} justifyContent="space-between">
+      <Grid container spacing={3} style={{flexWrap: 'nowrap', overflowX: 'scroll'}}>
         {todoLists && todoLists.map(tl =>
           <Grid item key={tl.id}>
-            <Paper variant={'outlined'}
-                   style={{padding: '10px'}}
-                   square>
-              <TodoList todoList={tl}/>
-            </Paper>
+            <TodoList todoList={tl}/>
           </Grid>)}
       </Grid>
     </Container>

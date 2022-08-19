@@ -1,5 +1,5 @@
 import {instance} from 'api/instance'
-import {TodoListType} from 'features/Todolist/TodoistTypes'
+import {TodoListType} from 'features/Todolist/TodoListTypes'
 import {ResponseType} from 'api/ResponseTypes'
 
 export const todoListAPI = {

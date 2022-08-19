@@ -1,8 +1,10 @@
-import {tasksReducer} from 'features/Task/tasksReducer'
 import {Status, TaskPriorities, TaskStatuses} from 'common/enums/projectEnums'
 import {TasksStateType} from 'features/Task/TaskType'
-import {addTask, removeTask, updateTask} from 'features/Task/taskActions'
-import {addTodoList, removeTodoList} from 'features/Todolist/todolistActions'
+import {tasksActions, tasksReducer} from 'features/Task'
+import {todoListsActions} from 'features/Todolist'
+
+const {removeTask,addTask,updateTask} = tasksActions
+const {removeTodoList, addTodoList} = todoListsActions
 
 let startState: TasksStateType
 
@@ -99,6 +101,7 @@ beforeEach(() => (
   }))
 
 test('correct task should be deleted from correct array', () => {
+
   let payload = {todoListId: 'todolistId2', taskId: '2'}
   const action = removeTask.fulfilled(payload, 'requestId', payload)
   const endState = tasksReducer(startState, action)

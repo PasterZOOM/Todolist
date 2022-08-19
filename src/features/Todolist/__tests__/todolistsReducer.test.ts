@@ -1,15 +1,14 @@
-import {
-  changeTodoListFilterAC,
-  todoListsReducer
-} from 'features/Todolist/todoListsReducer'
 import {v1} from 'uuid'
 import {Status, TodoListFilter} from 'common/enums/projectEnums'
-import {
+import {TodoListDomainType} from 'features/Todolist/TodoListTypes'
+import {todoListsActions, todoListsReducer} from 'features/Todolist'
+
+const {
+  removeTodoList,
   addTodoList,
   changeTodoListTitle,
-  removeTodoList
-} from 'features/Todolist/todolistActions'
-import {TodoListDomainType} from 'features/Todolist/TodoistTypes'
+  changeTodoListFilter
+} = todoListsActions
 
 let todoListId1 = v1()
 let todoListId2 = v1()
@@ -68,7 +67,7 @@ test('correct todo list should change its name', () => {
 test('correct filter of todo list should be changed', () => {
   let newFilter: TodoListFilter = TodoListFilter.COMPLETED
 
-  const action = changeTodoListFilterAC({todoListId: todoListId2, filter: newFilter})
+  const action = changeTodoListFilter({todoListId: todoListId2, filter: newFilter})
   const endState = todoListsReducer(startState, action)
 
   expect(endState[0].filter).toBe(TodoListFilter.ALL)

@@ -1,5 +1,5 @@
-import {AppRootStateType} from 'App/store'
 import {Status} from 'common/enums/projectEnums'
+import {AppRootStateType} from 'features/Application/AppTypes'
 
 export const getAppStatus = (state: AppRootStateType): Status =>
   state.app.status

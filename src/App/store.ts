@@ -1,21 +1,12 @@
 import {combineReducers} from 'redux'
-import thunk, {ThunkDispatch} from 'redux-thunk'
-import {tasksReducer} from 'features/Task/tasksReducer'
-import {
-  changeTodoListEntityStatusAC,
-  changeTodoListFilterAC,
-  todoListsReducer
-} from 'features/Todolist/todoListsReducer'
-import {
-  appReducer,
-  setAppErrorAC,
-  setAppStatusAC,
-  setIsInitializedAC
-} from 'App/appReducer'
+import thunk from 'redux-thunk'
 import {configureStore} from '@reduxjs/toolkit'
-import {authReducer, setIsLoggedInAC} from 'features/Auth/authReducer'
+import {tasksReducer} from 'features/Task'
+import {todoListsReducer} from 'features/Todolist'
+import {authReducer} from 'features/Auth'
+import {appReducer} from 'features/Application'
 
-const rootReducer = combineReducers({
+ export const rootReducer = combineReducers({
   tasks: tasksReducer,
   todoLists: todoListsReducer,
   app: appReducer,
@@ -26,14 +17,4 @@ export const store = configureStore({
   reducer: rootReducer,
   middleware: getDefaultMiddleware => getDefaultMiddleware().prepend(thunk),
 })
-export type AppRootStateType = ReturnType<typeof rootReducer>
 
-export type AppActionsType =
-  ReturnType<typeof changeTodoListFilterAC>
-  | ReturnType<typeof changeTodoListEntityStatusAC>
-  | ReturnType<typeof setAppStatusAC>
-  | ReturnType<typeof setAppErrorAC>
-  | ReturnType<typeof setIsInitializedAC>
-  | ReturnType<typeof setIsLoggedInAC>
-
-export type AppDispatchType = ThunkDispatch<AppRootStateType, unknown, AppActionsType>

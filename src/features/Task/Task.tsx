@@ -1,6 +1,5 @@
 import React, {ChangeEvent, useCallback} from 'react'
-
-import {useAppDispatch} from 'common/hooks/hooks'
+import {useActions} from 'common/hooks/hooks'
 import {Status, TaskStatuses} from 'common/enums/projectEnums'
 import {TaskDomainType} from 'features/Task/TaskType'
 import {Checkbox} from '@mui/material'
@@ -8,7 +7,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import {EditableSpan} from 'common/components/EditableSpan/EditableSpan'
 import {RemoveButton} from 'common/components/Buttons/RemoveButton/RemoveButton'
-import {removeTask, updateTask} from 'features/Task/taskActions'
+import {tasksActions} from './index'
 
 type PropsType = {
   todoListId: string
@@ -20,28 +19,27 @@ export const Task: React.FC<PropsType> = React.memo(({
                                                        todoListId
                                                      }) => {
   const {title, id, status, entityStatus} = task
+  const {removeTask, updateTask} = useActions(tasksActions)
 
-  const dispatch = useAppDispatch()
+  const onClickHandle = useCallback(() => {
+    removeTask({todoListId: todoListId, taskId: id})
+  }, [removeTask, todoListId, id])
 
-  const removeTaskCB = useCallback(() => {
-    dispatch(removeTask({todoListId: todoListId, taskId: id}))
-  }, [dispatch, todoListId, id])
+  const onChangeTitleHandle = useCallback((newTitle: string) => {
+    updateTask({taskId: id, todoListId: todoListId, model: {title: newTitle}})
+  }, [updateTask, id, todoListId])
 
-  const changeTaskTitle = useCallback((newTitle: string) => {
-    dispatch(updateTask({taskId: id, todoListId: todoListId, model: {title: newTitle}}))
-  }, [dispatch, todoListId, id])
-
-  const changeTaskStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateTask({
+  const onChangeStatusHandle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    updateTask({
       taskId: id, todoListId: todoListId, model: e.currentTarget.checked ?
         {status: TaskStatuses.Completed} : {status: TaskStatuses.New}
-    }))
-  }, [dispatch, todoListId, id])
+    })
+  }, [updateTask, id, todoListId])
 
   return (
     <div style={status === TaskStatuses.Completed ? {opacity: '0.75'} : {opacity: '1'}}>
 
-      <Checkbox onChange={changeTaskStatus}
+      <Checkbox onChange={onChangeStatusHandle}
                 checked={status === TaskStatuses.Completed}
                 size="small"
                 icon={<BookmarkBorderIcon/>}
@@ -49,9 +47,10 @@ export const Task: React.FC<PropsType> = React.memo(({
                 disabled={entityStatus === Status.LOADING}
       />
 
-      <EditableSpan title={title} onChange={changeTaskTitle} disabled={entityStatus === Status.LOADING}/>
+      <EditableSpan title={title} onChange={onChangeTitleHandle}
+                    disabled={entityStatus === Status.LOADING}/>
 
-      <RemoveButton tooltip={'Remove task'} onClick={removeTaskCB}
+      <RemoveButton tooltip={'Remove task'} onClick={onClickHandle}
                     disabled={entityStatus === Status.LOADING}/>
     </div>
   )
