@@ -11,11 +11,19 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 )
 
-root.render(
-  <HashRouter>
-    <Provider store={store}>
-      <App/>
-    </Provider>
-  </HashRouter>,
-)
-reportWebVitals()
+const rerenderEntireTree = () => {
+  root.render(
+    <HashRouter>
+      <Provider store={store}>
+        <App/>
+      </Provider>
+    </HashRouter>,
+  )
+  reportWebVitals()
+}
+
+rerenderEntireTree()
+
+if (process.env.NODE_ENV !== 'production' && module.hot) {
+  module.hot.accept('App/App', () => rerenderEntireTree())
+}

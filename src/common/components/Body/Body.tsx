@@ -24,7 +24,9 @@ export const Body = () => {
     if (!isLoggedIn) {
       return
     }
-    fetchTodoLists()
+    if (!todoLists.length) {
+      fetchTodoLists()
+    }
   }, [fetchTodoLists, isLoggedIn])
 
   if (!isLoggedIn) return <Navigate to={'/login'}/>

@@ -17,7 +17,7 @@ export const App = () => {
   const isInitialized = useAppSelector(getIsInitialized)
 
   useEffect(() => {
-    initializeApp()
+    !isInitialized && initializeApp()
   }, [initializeApp])
 
   if (!isInitialized) {

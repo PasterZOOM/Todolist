@@ -1,4 +1,4 @@
-import {rootReducer} from 'App/store'
+import {rootReducer} from 'App/rootReducer'
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 export type ThunkError = { rejectValue: { errors: Array<string>, fieldsErrors?: Array<FieldErrorType> } }
