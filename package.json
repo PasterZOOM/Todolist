@@ -1,6 +1,6 @@
 {
   "name": "todolist-dimych",
-  "homepage": "https://PasterZOOM.github.io/todolist-dimych",
+  "homepage": "https://PasterZOOM.github.io/todolist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,12 +17,15 @@
     "@testing-library/user-event": "^14.2.0",
     "@types/jest": "^28.1.0",
     "@types/node": "^17.0.39",
+    "@types/overlayscrollbars": "^1.12.1",
     "@types/react": "^18.0.11",
     "@types/react-dom": "^18.0.5",
     "@types/react-redux": "^7.1.24",
     "@types/uuid": "^8.3.4",
     "axios": "^0.27.2",
     "formik": "^2.2.9",
+    "overlayscrollbars": "1.13.3",
+    "overlayscrollbars-react": "^0.3.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-redux": "^8.0.2",

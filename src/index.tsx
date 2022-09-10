@@ -6,6 +6,8 @@ import {HashRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import {store} from 'App/store'
 import {App} from 'App/App'
+import 'overlayscrollbars/css/OverlayScrollbars.css'
+import OverlayScrollbars from 'overlayscrollbars'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,6 +21,11 @@ const rerenderEntireTree = () => {
       </Provider>
     </HashRouter>,
   )
+  OverlayScrollbars(document.body, {
+    scrollbars: {
+      clickScrolling: true,
+    },
+  })
   reportWebVitals()
 }
 
