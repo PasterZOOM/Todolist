@@ -67,7 +67,7 @@ export const TodoList: React.FC<PropsType> = React.memo(({todoList}) => {
                     disabled={todoList.entityStatus === Status.LOADING}/>
 
       <div>
-        {!filteredTasks.length && <span>No tasks</span>}
+        {/*{!filteredTasks.length && <span>No tasks</span>}*/}
         {filteredTasks.map(task => <Task key={task.id}
                                          task={task}
                                          todoListId={todoList.id}/>)}
